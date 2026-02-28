@@ -25,6 +25,8 @@ A self-hosted RSS aggregator that surfaces cybersecurity news relevant to K-12 s
 | Bleeping Computer | Filtered |
 | Dark Reading | Filtered |
 | SecurityWeek | Filtered |
+| EdTech IRL | Yes |
+| Zero Breach Zone (Podcast) | Yes |
 
 "Filtered" sources are checked against a keyword list (school, district, student, FERPA, COPPA, edtech, etc.) before inclusion.
 

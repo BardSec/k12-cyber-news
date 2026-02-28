@@ -66,6 +66,16 @@ const FEEDS = [
     url: 'https://feeds.feedburner.com/Securityweek',
     alwaysInclude: false,
   },
+  {
+    name: 'EdTech IRL',
+    url: 'https://www.edtechirl.com/feed',
+    alwaysInclude: true,
+  },
+  {
+    name: 'Zero Breach Zone (Podcast)',
+    url: 'https://feeds.transistor.fm/zero-breach-zone',
+    alwaysInclude: true,
+  },
 ];
 
 // Keywords that indicate K-12 / education relevance
