@@ -4,12 +4,12 @@ services:
     container_name: k12-cyber-news
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "30303:30303"
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=30303
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/sources"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:30303/api/sources"]
       interval: 30s
       timeout: 10s
       retries: 3
