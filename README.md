@@ -1,21 +1,21 @@
-# K-12 Cyber Watch
+# K12 Cyber Watch
 
-A self-hosted RSS aggregator that surfaces cybersecurity news relevant to K-12 schools and districts. Articles are pulled from multiple industry sources, filtered for education relevance, deduplicated, and served through a clean web interface.
+A self-hosted RSS aggregator that surfaces cybersecurity news relevant to K12 schools and districts. Articles are pulled from multiple industry sources, filtered for education relevance, deduplicated, and served through a clean web interface.
 
 ## Features
 
-- Aggregates from 10 RSS sources including CISA, EdScoop, Bleeping Computer, Dark Reading, EdTechIRL, and Google News searches scoped to K-12 and ransomware
+- Aggregates from 10 RSS sources including CISA, EdScoop, Bleeping Computer, Dark Reading, EdTechIRL, and Google News searches scoped to K12 and ransomware
 - Keyword filtering ensures general-purpose security feeds only surface education-relevant stories
 - In-memory cache refreshes every 15 minutes — no database required
 - Search, source filter, and sort controls in the UI
-- Quick-access tag cloud for common K-12 threat topics (ransomware, FERPA, PowerSchool, etc.)
+- Quick-access tag cloud for common K12 threat topics (ransomware, FERPA, PowerSchool, etc.)
 - Pagination with configurable page size
 
 ## Sources
 
 | Source | Always included |
 |---|---|
-| Google News – K-12 Cybersecurity | Yes |
+| Google News – K12 Cybersecurity | Yes |
 | Google News – School Ransomware | Yes |
 | CISA Advisories | Filtered |
 | EdScoop | Filtered |
@@ -28,7 +28,7 @@ A self-hosted RSS aggregator that surfaces cybersecurity news relevant to K-12 s
 | The 74 Million | Filtered |
 | EdSurge | Filtered |
 | eSchool News | Filtered |
-| K-12 Dive | Filtered |
+| K12 Dive | Filtered |
 | The Independent – Education | Filtered |
 | Chalkbeat | Filtered |
 | Education Next | Filtered |

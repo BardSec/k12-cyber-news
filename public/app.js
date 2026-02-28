@@ -1,4 +1,4 @@
-/* K-12 Cyber Watch — frontend */
+/* K12 Cyber Watch — frontend */
 
 const API = '';          // same origin
 const PAGE_SIZE = 15;
