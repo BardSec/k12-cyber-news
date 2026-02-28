@@ -205,9 +205,9 @@ a:hover { text-decoration: underline; }
   align-items: start;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .main-layout { grid-template-columns: 1fr; }
-  .sidebar { order: -1; position: static; }
+  .sidebar { position: static; top: auto; }
 }
 
 /* ─── Feed ──────────────────────────────────────────────────────────────── */
