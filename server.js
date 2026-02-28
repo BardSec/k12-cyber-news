@@ -70,41 +70,49 @@ const FEEDS = [
     name: 'The 74 Million',
     url: 'https://the74million.org/feed',
     alwaysInclude: false,
+    cyberFilter: true,
   },
   {
     name: 'EdSurge',
     url: 'https://www.edsurge.com/articles_rss',
     alwaysInclude: false,
+    cyberFilter: true,
   },
   {
     name: 'eSchool News',
     url: 'https://eschoolnews.com/feed',
     alwaysInclude: false,
+    cyberFilter: true,
   },
   {
     name: 'K-12 Dive',
     url: 'https://www.k12dive.com/feeds/news/',
     alwaysInclude: false,
+    cyberFilter: true,
   },
   {
     name: 'The Independent – Education',
     url: 'http://www.independent.co.uk/news/education/rss',
     alwaysInclude: false,
+    cyberFilter: true,
   },
   {
     name: 'Chalkbeat',
     url: 'https://www.chalkbeat.org/arc/outboundfeeds/rss/',
     alwaysInclude: false,
+    cyberFilter: true,
   },
   {
     name: 'Education Next',
     url: 'https://www.educationnext.org/feed/',
     alwaysInclude: false,
+    cyberFilter: true,
   },
   {
     name: 'NYT – Education',
     url: 'https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/education/rss.xml',
     alwaysInclude: false,
+    cyberFilter: true,
   },
   {
     name: 'EdTech IRL',
@@ -118,6 +126,18 @@ const FEEDS = [
   },
 ];
 
+// Keywords that indicate cybersecurity relevance
+const CYBER_KEYWORDS = [
+  'cybersecurity', 'cyber security', 'cyber attack', 'cyberattack',
+  'ransomware', 'malware', 'phishing', 'data breach', 'hack', 'hacker',
+  'vulnerability', 'exploit', 'cisa', 'nist', 'incident response',
+  'data privacy', 'identity theft', 'credential', 'password', 'mfa',
+  'two-factor', 'zero-day', 'patch', 'firewall', 'encryption',
+  'infosec', 'threat', 'intrusion', 'ddos', 'spyware', 'trojan',
+  'social engineering', 'vishing', 'smishing', 'dark web',
+  'powerschool', 'ferpa', 'coppa', 'student data', 'data protection',
+];
+
 // Keywords that indicate K-12 / education relevance
 const K12_KEYWORDS = [
   'k-12', 'k12', 'school', 'district', 'student', 'education',
@@ -128,15 +148,21 @@ const K12_KEYWORDS = [
   'student data', 'ferpa', 'coppa', 'children', 'minors',
 ];
 
-function isK12Relevant(item) {
-  const text = [
+function itemText(item) {
+  return [
     item.title || '',
     item.contentSnippet || '',
     item.content || '',
     item.categories?.join(' ') || '',
   ].join(' ').toLowerCase();
+}
 
-  return K12_KEYWORDS.some(kw => text.includes(kw));
+function isK12Relevant(item) {
+  return K12_KEYWORDS.some(kw => itemText(item).includes(kw));
+}
+
+function isCyberRelevant(item) {
+  return CYBER_KEYWORDS.some(kw => itemText(item).includes(kw));
 }
 
 function normalizeItem(item, feedName) {
@@ -160,6 +186,7 @@ async function fetchFeed(feed) {
     const items = result.items || [];
     const normalized = items.map(i => normalizeItem(i, feed.name));
     if (feed.alwaysInclude) return normalized;
+    if (feed.cyberFilter) return normalized.filter(isCyberRelevant);
     return normalized.filter(isK12Relevant);
   } catch (err) {
     console.warn(`[warn] Failed to fetch "${feed.name}": ${err.message}`);
