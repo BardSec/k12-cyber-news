@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K-12 Cyber Watch — Cybersecurity News for Schools</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🛡️</span>
+        <div>
+          <span class="logo-title">K-12 Cyber Watch</span>
+          <span class="logo-sub">Cybersecurity News for Schools &amp; Districts</span>
+        </div>
+      </div>
+
+      <div class="header-meta">
+        <span class="badge live">● LIVE FEED</span>
+        <button id="btn-refresh" class="btn-icon" title="Refresh feed">↻</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Controls bar ── -->
+  <div class="controls-bar">
+    <div class="controls-inner">
+      <!-- Search -->
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search articles…"
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Source filter -->
+      <div class="filter-wrap">
+        <label for="source-select">Source</label>
+        <select id="source-select">
+          <option value="">All Sources</option>
+        </select>
+      </div>
+
+      <!-- Sort -->
+      <div class="filter-wrap">
+        <label for="sort-select">Sort</label>
+        <select id="sort-select">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Main layout ── -->
+  <main class="main-layout">
+
+    <!-- Feed -->
+    <section class="feed-section">
+      <div class="feed-header">
+        <h2 id="feed-title">Latest Articles</h2>
+        <span id="article-count" class="count-badge"></span>
+      </div>
+
+      <div id="feed" class="feed"></div>
+
+      <div id="pagination" class="pagination"></div>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <div class="sidebar-card">
+        <h3>About This Feed</h3>
+        <p>
+          K-12 Cyber Watch aggregates articles from leading cybersecurity and
+          education-technology outlets, filtered for stories relevant to
+          K-12 schools and districts. The feed refreshes automatically every
+          15 minutes.
+        </p>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Key Topics</h3>
+        <div class="tag-cloud" id="tag-cloud">
+          <span class="tag" data-q="ransomware">Ransomware</span>
+          <span class="tag" data-q="data breach">Data Breach</span>
+          <span class="tag" data-q="phishing">Phishing</span>
+          <span class="tag" data-q="CISA">CISA</span>
+          <span class="tag" data-q="PowerSchool">PowerSchool</span>
+          <span class="tag" data-q="FERPA">FERPA</span>
+          <span class="tag" data-q="student data">Student Data</span>
+          <span class="tag" data-q="malware">Malware</span>
+          <span class="tag" data-q="incident response">Incident Response</span>
+          <span class="tag" data-q="vulnerability">Vulnerability</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Sources</h3>
+        <ul id="source-list" class="source-list"></ul>
+      </div>
+
+      <div class="sidebar-card stat-card">
+        <div class="stat">
+          <span id="stat-total">—</span>
+          <small>Articles indexed</small>
+        </div>
+        <div class="stat">
+          <span id="stat-sources">—</span>
+          <small>News sources</small>
+        </div>
+        <div class="stat">
+          <span id="stat-refresh">—</span>
+          <small>Last refreshed</small>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- ── Skeleton template ── -->
+  <template id="skeleton-tpl">
+    <article class="card skeleton">
+      <div class="sk-line sk-title"></div>
+      <div class="sk-line sk-meta"></div>
+      <div class="sk-line sk-body"></div>
+      <div class="sk-line sk-body short"></div>
+    </article>
+  </template>
+
+  <!-- ── Article card template ── -->
+  <template id="card-tpl">
+    <article class="card">
+      <div class="card-source-row">
+        <span class="card-source"></span>
+        <time class="card-date"></time>
+      </div>
+      <h3 class="card-title"><a class="card-link" target="_blank" rel="noopener noreferrer"></a></h3>
+      <p class="card-summary"></p>
+      <a class="card-read-more" target="_blank" rel="noopener noreferrer">Read full article →</a>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
