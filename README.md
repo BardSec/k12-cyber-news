@@ -4,7 +4,7 @@ A self-hosted RSS aggregator that surfaces cybersecurity news relevant to K-12 s
 
 ## Features
 
-- Aggregates from 10 RSS sources including CISA, EdScoop, Bleeping Computer, Dark Reading, and Google News searches scoped to K-12 and ransomware
+- Aggregates from 10 RSS sources including CISA, EdScoop, Bleeping Computer, Dark Reading, EdTechIRL, and Google News searches scoped to K-12 and ransomware
 - Keyword filtering ensures general-purpose security feeds only surface education-relevant stories
 - In-memory cache refreshes every 15 minutes — no database required
 - Search, source filter, and sort controls in the UI
