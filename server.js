@@ -67,6 +67,46 @@ const FEEDS = [
     alwaysInclude: false,
   },
   {
+    name: 'The 74 Million',
+    url: 'https://the74million.org/feed',
+    alwaysInclude: false,
+  },
+  {
+    name: 'EdSurge',
+    url: 'https://www.edsurge.com/articles_rss',
+    alwaysInclude: false,
+  },
+  {
+    name: 'eSchool News',
+    url: 'https://eschoolnews.com/feed',
+    alwaysInclude: false,
+  },
+  {
+    name: 'K-12 Dive',
+    url: 'https://www.k12dive.com/feeds/news/',
+    alwaysInclude: false,
+  },
+  {
+    name: 'The Independent – Education',
+    url: 'http://www.independent.co.uk/news/education/rss',
+    alwaysInclude: false,
+  },
+  {
+    name: 'Chalkbeat',
+    url: 'https://www.chalkbeat.org/arc/outboundfeeds/rss/',
+    alwaysInclude: false,
+  },
+  {
+    name: 'Education Next',
+    url: 'https://www.educationnext.org/feed/',
+    alwaysInclude: false,
+  },
+  {
+    name: 'NYT – Education',
+    url: 'https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/education/rss.xml',
+    alwaysInclude: false,
+  },
+  {
     name: 'EdTech IRL',
     url: 'https://www.edtechirl.com/feed',
     alwaysInclude: true,

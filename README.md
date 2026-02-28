@@ -25,6 +25,14 @@ A self-hosted RSS aggregator that surfaces cybersecurity news relevant to K-12 s
 | Bleeping Computer | Filtered |
 | Dark Reading | Filtered |
 | SecurityWeek | Filtered |
+| The 74 Million | Filtered |
+| EdSurge | Filtered |
+| eSchool News | Filtered |
+| K-12 Dive | Filtered |
+| The Independent – Education | Filtered |
+| Chalkbeat | Filtered |
+| Education Next | Filtered |
+| NYT – Education | Filtered |
 | EdTech IRL | Yes |
 | Zero Breach Zone (Podcast) | Yes |
 
