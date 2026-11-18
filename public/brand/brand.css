@@ -164,3 +164,34 @@ html[data-site="ressec"] {
   border-radius: var(--radius);
 }
 .subscribe-btn:hover { text-decoration: none; filter: brightness(1.1); }
+
+/* ── Sponsor card (sidebar) and footer line ── */
+.sponsor-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.sponsor-name:hover { text-decoration: none; color: var(--text); }
+.sponsor-name img { width: 28px; height: 28px; display: block; }
+
+.sponsor-card p { font-size: .85rem; color: var(--text-muted); }
+.sponsor-cta { display: inline-block; margin: 10px 0 12px; font-size: .85rem; font-weight: 600; }
+
+.sponsor-disclosure {
+  font-size: .75rem !important;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.footer-sponsor { margin-left: auto; white-space: nowrap; }
+.footer-sponsor a { display: inline-flex; align-items: center; gap: 5px; vertical-align: middle; }
+.footer-sponsor img { width: 20px; height: 20px; }
+
+@media (max-width: 600px) {
+  .footer-inner { flex-wrap: wrap; }
+  .footer-sponsor { margin-left: 0; }
+}

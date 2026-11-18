@@ -102,6 +102,16 @@ Each build also writes `feed.xml`, an RSS 2.0 feed of the 50 newest articles, at
 - `lib/feed.js` is identical in all three news repos.
 - The feed exists only in the static build (`npm run build`), not in the local Express server.
 
+## Sponsor
+
+The EdTech IRL news sites are sponsored by [SoftwareStudioK12](https://softwarestudiok12.com/). Each page shows a sponsor card in the sidebar and a "Sponsored by" line in the footer, both with a disclosure that the sponsor is the author's company and has no say in which articles appear.
+
+- The sponsor's name, logo, link, per-site message, call to action, disclosure and `utm_source` live in the `sponsor` section of `site.json`. Edit that to change the sponsor or its message.
+- At build time, `lib/sponsor.js` (identical in all three repos) replaces the `<!-- SPONSOR_CARD -->` and `<!-- SPONSOR_FOOTER -->` placeholders in `index.html`.
+- The local Express server serves `public/` unbuilt, so it doesn't show the sponsor block.
+- Sponsor links carry UTM tags (`utm_medium=sponsor`, `utm_campaign=edtechirl-news`, `utm_content=sidebar|footer`). Clicks show up in SoftwareStudioK12's analytics. The news sites themselves track nothing.
+- The logo is `public/brand/sponsor-softwarestudiok12.svg`, a light-only copy of the mark from softwarestudiok12.com. The original switches its lines to white in dark mode, which would vanish on these white cards.
+
 ## Branding (EdTech IRL network)
 
 This site is one of three EdTech IRL news feeds: [K12 Cyber Watch](https://news.edtechirl.com/), [HiEd Cyber News](https://hied-news.edtechirl.com/) and [ResSec News](https://ressec-news.edtechirl.com/). Each has the same top bar and footer linking the three sites and the [EdTech IRL blog](https://www.edtechirl.com/).

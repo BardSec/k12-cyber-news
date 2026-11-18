@@ -10,6 +10,7 @@ const crypto = require('crypto');
 const path = require('path');
 const { FEEDS, fetchAll, sourceNames } = require('../lib/aggregator');
 const { buildRss } = require('../lib/feed');
+const { applySponsor } = require('../lib/sponsor');
 
 const ROOT = path.join(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
@@ -36,6 +37,7 @@ const MIN_ARTICLES = parseInt(process.env.MIN_ARTICLES, 10) || 20;
   // makes every changed file a new URL.
   const indexPath = path.join(DIST, 'index.html');
   let html = fs.readFileSync(indexPath, 'utf8');
+  html = applySponsor(html, SITE);   // sponsor card + footer line from site.json
   html = html.replace(/(href|src)="([^"?#:]+\.(?:css|js))"/g, (match, attr, file) => {
     const assetPath = path.join(DIST, file);
     if (!fs.existsSync(assetPath)) return match;

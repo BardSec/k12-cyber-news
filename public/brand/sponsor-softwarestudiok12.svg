@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="ssk12mark">
+  <title id="ssk12mark">SoftwareStudioK12</title>
+  <style>
+    .ink { stroke: #10182B }
+    .paper { stroke: #F8FAFC }
+  </style>
+  <g fill="none" stroke-width="9">
+    <rect class="ink" x="5" y="10" width="38" height="23" rx="11.5" transform="rotate(-14 24 21.5)"/>
+    <rect stroke="#3B82F6" x="21" y="31" width="38" height="23" rx="11.5" transform="rotate(-14 40 42.5)"/>
+  </g>
+  <path class="paper" d="M27 29l10 6" stroke-width="11" stroke-linecap="round"/>
+  <path class="ink" d="M27 29l10 6" stroke-width="4" stroke-linecap="round"/>
+</svg>
