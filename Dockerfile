@@ -22,6 +22,7 @@ COPY --from=builder /app/node_modules ./node_modules
 
 # Copy application source
 COPY server.js ./
+COPY lib ./lib
 COPY public ./public
 
 # Owned by non-root user

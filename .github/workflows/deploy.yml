@@ -1,0 +1,65 @@
+name: Build & deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [claude/k12-security-news-aggregator-CZ9zy]
+  schedule:
+    # Rebuild the article data every 30 minutes (GitHub may delay scheduled runs)
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+    inputs:
+      force_keepalive:
+        description: 'Push a keepalive commit even if the last commit is recent'
+        type: boolean
+        default: false
+
+# contents: write lets the keepalive step push an empty commit
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Exits non-zero if the fetch looks broken, which skips the deploy
+      - run: node scripts/build.js
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=k12-cyber-news --branch=main
+
+      # GitHub disables scheduled workflows in public repos after 60 days with
+      # no repository activity, which would silently stop the news updates.
+      # If the last commit is 25+ days old, push an empty commit to reset the clock.
+      # Pushes made with GITHUB_TOKEN don't trigger another workflow run, so this can't loop.
+      - name: Keepalive commit
+        if: github.event_name == 'schedule' || inputs.force_keepalive
+        continue-on-error: true  # a failed push just retries on the next run
+        run: |
+          last=$(git log -1 --format=%ct)
+          age_days=$(( ($(date +%s) - last) / 86400 ))
+          echo "Last commit was ${age_days} days ago"
+          if [ "$age_days" -lt 25 ] && [ "${{ inputs.force_keepalive }}" != "true" ]; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "keepalive: prevent scheduled workflow from being disabled"
+          git push

@@ -6,7 +6,8 @@ A self-hosted RSS aggregator that surfaces cybersecurity news relevant to K12 sc
 
 - Aggregates from 10 RSS sources including CISA, EdScoop, Bleeping Computer, Dark Reading, EdTechIRL, and Google News searches scoped to K12 and ransomware
 - Keyword filtering ensures general-purpose security feeds only surface education-relevant stories
-- In-memory cache refreshes every 15 minutes — no database required
+- Runs as a static site on Cloudflare Pages, rebuilt every 30 minutes by GitHub Actions — no server or database required
+- Can also run as a Node/Express server in Docker, with an in-memory cache that refreshes every 15 minutes
 - Search, source filter, and sort controls in the UI
 - Quick-access tag cloud for common K12 threat topics (ransomware, FERPA, PowerSchool, etc.)
 - Pagination with configurable page size
@@ -38,6 +39,33 @@ A self-hosted RSS aggregator that surfaces cybersecurity news relevant to K12 sc
 
 "Filtered" sources are checked against a keyword list (school, district, student, FERPA, COPPA, edtech, etc.) before inclusion.
 
+## Deploying to Cloudflare Pages
+
+The Pages site is plain static files. `scripts/build.js` fetches every feed, writes
+`dist/data/articles.json` and `dist/data/sources.json`, and copies `public/` into `dist/`.
+The frontend loads those two files and does search, filtering and paging in the browser.
+
+`.github/workflows/deploy.yml` runs the build and deploys `dist/` with Wrangler:
+
+- every 30 minutes on a schedule (GitHub may run scheduled jobs late)
+- on every push to `claude/k12-security-news-aggregator-CZ9zy`
+- by hand from the Actions tab ("Run workflow")
+
+If fewer than 20 articles come back, or more than half the feeds fail, the build exits
+with an error and the deploy is skipped, so the last good version stays live.
+
+GitHub disables scheduled workflows in public repos after 60 days with no commits. To
+prevent that, the scheduled run pushes an empty "keepalive" commit when the last commit
+is 25 or more days old.
+
+**One-time setup:**
+
+1. Create the Pages project: `npx wrangler pages project create k12-cyber-news --production-branch=main`
+2. Add repository secrets `CLOUDFLARE_API_TOKEN` (with Cloudflare Pages: Edit permission) and `CLOUDFLARE_ACCOUNT_ID`
+3. Run the workflow once from the Actions tab, then add the custom domain to the Pages project
+
+To build locally: `npm run build`, then serve `dist/` with any static file server.
+
 ## Running with Docker
 
 ```bash
@@ -56,7 +84,9 @@ npm run dev      # development (auto-restarts on file change)
 
 Defaults to port `3000` unless the `PORT` environment variable is set.
 
-## API
+## API (Docker / local server only)
+
+The static Pages site has no API. The server also serves `/data/articles.json` and `/data/sources.json`, the same files the static build writes.
 
 | Endpoint | Description |
 |---|---|
@@ -69,4 +99,5 @@ Defaults to port `3000` unless the `PORT` environment variable is set.
 - Node.js 20 / Express
 - [rss-parser](https://github.com/rbren/rss-parser)
 - Vanilla JS frontend (no framework)
+- Cloudflare Pages (static build) + GitHub Actions (schedule)
 - Docker multi-stage build (builder + runtime, non-root user)

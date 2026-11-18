@@ -1,6 +1,6 @@
 /* K12 Cyber Watch — frontend */
 
-const API = '';          // same origin
+const API = '';          // same origin; relative data paths work on Pages and in Docker
 const PAGE_SIZE = 15;
 
 let state = {
@@ -93,13 +93,13 @@ function renderArticles() {
     node.querySelector('.card-date').textContent   = formatDate(article.published);
 
     const link = node.querySelector('.card-link');
-    link.href        = escapeHtml(article.link);
+    link.href        = article.link;
     link.textContent = article.title;
 
     node.querySelector('.card-summary').textContent = truncate(article.summary);
 
     const readMore = node.querySelector('.card-read-more');
-    readMore.href = escapeHtml(article.link);
+    readMore.href = article.link;
 
     feed.appendChild(node);
   }
@@ -202,20 +202,18 @@ function applyFilters() {
 }
 
 // ── Fetch ─────────────────────────────────────────────────────────────────
-async function fetchArticles(forceRefresh = false) {
+// Data comes from static JSON files rebuilt on a schedule (Cloudflare Pages),
+// or served live from the same paths by server.js in local dev / Docker.
+async function fetchArticles() {
   if (state.loading) return;
   state.loading = true;
   btnRefresh.classList.add('spinning');
   showSkeletons();
 
   try {
-    if (forceRefresh) {
-      await fetch(`${API}/api/refresh`);
-    }
-
     const [articlesRes, sourcesRes] = await Promise.all([
-      fetch(`${API}/api/articles?limit=500`),
-      fetch(`${API}/api/sources`),
+      fetch(`${API}/data/articles.json`, { cache: 'no-cache' }),
+      fetch(`${API}/data/sources.json`, { cache: 'no-cache' }),
     ]);
 
     if (!articlesRes.ok) throw new Error('Failed to load articles');
@@ -271,7 +269,7 @@ sortSelect.addEventListener('change', () => {
   applyFilters();
 });
 
-btnRefresh.addEventListener('click', () => fetchArticles(true));
+btnRefresh.addEventListener('click', () => fetchArticles());
 
 tagCloud.addEventListener('click', e => {
   const tag = e.target.closest('.tag');
@@ -292,7 +290,7 @@ tagCloud.addEventListener('click', e => {
 });
 
 // Auto-refresh every 15 minutes
-setInterval(() => fetchArticles(false), 15 * 60 * 1000);
+setInterval(() => fetchArticles(), 15 * 60 * 1000);
 
 // ── Boot ──────────────────────────────────────────────────────────────────
 fetchArticles();

@@ -4,3 +4,6 @@ node_modules/
 *.log
 .env
 docker-compose.yml
+dist/
+scripts/
+.github/
