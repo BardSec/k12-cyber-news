@@ -104,7 +104,7 @@ Each build also writes `feed.xml`, an RSS 2.0 feed of the 50 newest articles, at
 
 ## Sponsor
 
-The EdTech IRL news sites are sponsored by [SoftwareStudioK12](https://softwarestudiok12.com/). Each page shows a sponsor card in the sidebar and a "Sponsored by" line in the footer, both with a disclosure that the sponsor is the author's company and has no say in which articles appear.
+The EdTech IRL news sites are sponsored by [SoftwareStudioK12](https://softwarestudiok12.com/). Each page shows a sponsor card in the sidebar and a "Sponsored by" line in the footer, both with a disclosure that the sponsor has no say in which articles appear.
 
 - The sponsor's name, logo, link, per-site message, call to action, disclosure and `utm_source` live in the `sponsor` section of `site.json`. Edit that to change the sponsor or its message.
 - At build time, `lib/sponsor.js` (identical in all three repos) replaces the `<!-- SPONSOR_CARD -->` and `<!-- SPONSOR_FOOTER -->` placeholders in `index.html`.
