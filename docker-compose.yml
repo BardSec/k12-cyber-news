@@ -4,7 +4,7 @@ services:
     container_name: k12-cyber-news
     restart: unless-stopped
     ports:
-      - "30303:30303"
+      - "127.0.0.1:30303:30303"
     environment:
       - NODE_ENV=production
       - PORT=30303
