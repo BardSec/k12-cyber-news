@@ -1,8 +1,8 @@
 /* ─────────────────────────────────────────────────────────────────────────
    EdTech IRL network branding — shared by the news sites:
      K12 Cyber Watch   news.edtechirl.com          <html data-site="k12">
-     HiEd Cyber News   hied-news.edtechirl.com     <html data-site="hied">
-     ResSec News       ressec-news.edtechirl.com   <html data-site="ressec">
+     HiEd Security News   hied-news.edtechirl.com     <html data-site="hied">
+     Research Security News       ressec-news.edtechirl.com   <html data-site="ressec">
 
    This file is IDENTICAL in all three repos — edit it in one, copy it to
    the others. Load it after styles.css; it overrides that file's colors.
@@ -197,30 +197,35 @@ html[data-site="ressec"] {
 }
 
 /* ── Pinned top: EdTech IRL bar always visible ──
-   Desktop: the network bar pins at the very top and the site header pins
-   directly beneath it, so the bar is held to one 40px row.
-   Phones: the bar wraps to two rows, so only the bar stays pinned and the
-   site header scrolls away, keeping most of the screen for articles. */
+   Wide screens (861px+): the network bar pins at the very top on one 40px row
+   and the site header pins directly beneath it.
+   Narrower screens: the bar uses two compact rows, so only the bar stays
+   pinned and the site header scrolls away, keeping room for articles.
+   861px is where the full bar (logo + all four links) fits on one row. */
 .network-bar {
   position: sticky;
   top: 0;
   z-index: 110;
 }
 
-@media (min-width: 601px) {
+@media (min-width: 861px) {
   .network-inner { flex-wrap: nowrap; height: 40px; padding-top: 0; padding-bottom: 0; }
   .site-header { top: 40px; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 860px) {
   .site-header { position: static; }
-}
 
-/* Phones: keep the pinned bar to two short rows. "Blog" is dropped because the
-   EdTech IRL logo and name already link to the blog. */
-@media (max-width: 600px) {
+  /* Two short rows: logo on top, site links below. "Blog" is dropped because
+     the EdTech IRL logo and name already link to the blog. */
   .network-inner { padding: 4px 16px 2px; gap: 2px 12px; }
   .network-brand img { width: 24px; height: 24px; }
   .network-links { gap: 2px 12px; font-size: .75rem; }
   .network-links li:last-child { display: none; }
+}
+
+/* Phones: drop the last word of each site name in the bar ("K12 Cyber",
+   "HiEd Security", "Research Security") so the links fit on one row. */
+@media (max-width: 600px) {
+  .nl-tail { display: none; }
 }
