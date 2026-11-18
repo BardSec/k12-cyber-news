@@ -195,3 +195,32 @@ html[data-site="ressec"] {
   .footer-inner { flex-wrap: wrap; }
   .footer-sponsor { margin-left: 0; }
 }
+
+/* ── Pinned top: EdTech IRL bar always visible ──
+   Desktop: the network bar pins at the very top and the site header pins
+   directly beneath it, so the bar is held to one 40px row.
+   Phones: the bar wraps to two rows, so only the bar stays pinned and the
+   site header scrolls away, keeping most of the screen for articles. */
+.network-bar {
+  position: sticky;
+  top: 0;
+  z-index: 110;
+}
+
+@media (min-width: 601px) {
+  .network-inner { flex-wrap: nowrap; height: 40px; padding-top: 0; padding-bottom: 0; }
+  .site-header { top: 40px; }
+}
+
+@media (max-width: 600px) {
+  .site-header { position: static; }
+}
+
+/* Phones: keep the pinned bar to two short rows. "Blog" is dropped because the
+   EdTech IRL logo and name already link to the blog. */
+@media (max-width: 600px) {
+  .network-inner { padding: 4px 16px 2px; gap: 2px 12px; }
+  .network-brand img { width: 24px; height: 24px; }
+  .network-links { gap: 2px 12px; font-size: .75rem; }
+  .network-links li:last-child { display: none; }
+}
