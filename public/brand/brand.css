@@ -1,0 +1,146 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   EdTech IRL network branding — shared by the news sites:
+     K12 Cyber Watch   news.edtechirl.com          <html data-site="k12">
+     HiEd Cyber News   hied-news.edtechirl.com     <html data-site="hied">
+     ResSec News       ressec-news.edtechirl.com   <html data-site="ressec">
+
+   This file is IDENTICAL in all three repos — edit it in one, copy it to
+   the others. Load it after styles.css; it overrides that file's colors.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Light theme to match edtechirl.com (white page, charcoal text) */
+:root {
+  color-scheme: light;
+
+  --bg:          #f6f6f4;
+  --surface:     #ffffff;
+  --surface2:    #f0f0ed;
+  --border:      #e2e2de;
+  --danger:      #cf222e;
+  --success:     #1a7f37;
+  --warning:     #9a6700;
+  --text:        #363737;   /* edtechirl.com body text */
+  --text-muted:  #6b6b6b;
+  --shadow:      0 1px 2px rgba(0,0,0,.06);
+
+  --brand:       #FD5353;   /* edtechirl.com accent; decoration only, too light for text */
+  --brand-dark:  #363737;   /* charcoal from the IRL badge */
+  --brand-cream: #f3f1ec;   /* cream from the IRL badge */
+}
+
+/* Per-site accents.
+   --accent        text, links, active states. Each passes 4.5:1 on white.
+   --accent-bright stripes and highlights only (not for text). */
+html[data-site="k12"] {
+  --accent:        #1d4ed8;
+  --accent-bright: #3b82f6;
+  --accent-glow:   rgba(59,130,246,.12);
+  --accent-border: rgba(29,78,216,.25);
+}
+html[data-site="hied"] {
+  --accent:        #0f766e;
+  --accent-bright: #14b8a6;
+  --accent-glow:   rgba(20,184,166,.12);
+  --accent-border: rgba(15,118,110,.25);
+}
+html[data-site="ressec"] {
+  --accent:        #b45309;
+  --accent-bright: #ff8200;
+  --accent-glow:   rgba(255,130,0,.12);
+  --accent-border: rgba(180,83,9,.25);
+}
+
+/* ── Fixes for colors styles.css hard-codes for its old dark theme ── */
+.card-source { border-color: var(--accent-border); }
+.page-btn.active { color: #fff; }
+.site-header { border-bottom: 3px solid var(--accent-bright); }
+.card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+
+/* ── Network bar (top of every page) ── */
+.network-bar {
+  background: var(--brand-dark);
+  color: var(--brand-cream);
+  font-size: .8rem;
+}
+
+.network-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 6px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.network-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand-cream);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+.network-brand:hover { text-decoration: none; color: #fff; }
+.network-brand img { width: 28px; height: 28px; display: block; }
+
+.network-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.network-links a {
+  color: #c9c9c5;
+  padding: 3px 0;
+  border-bottom: 2px solid transparent;
+}
+.network-links a:hover { color: #fff; text-decoration: none; border-bottom-color: #8a8a86; }
+.network-links a[aria-current="page"] {
+  color: #fff;
+  font-weight: 600;
+  border-bottom-color: var(--brand);
+}
+
+/* ── Network footer ── */
+.network-footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  margin-top: 40px;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: .85rem;
+  color: var(--text-muted);
+}
+.footer-inner img { width: 40px; height: 40px; flex-shrink: 0; display: block; }
+.footer-inner a { color: var(--text); font-weight: 600; }
+.footer-inner a:hover { color: var(--accent); }
+
+/* ── Header right side: LIVE badge + rebuild note ── */
+.header-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.feed-note {
+  font-size: .72rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* Phones: badge and note on their own row under the site name */
+@media (max-width: 600px) {
+  .header-inner { flex-wrap: wrap; }
+  .header-meta { flex-direction: row; align-items: center; gap: 10px; width: 100%; }
+}

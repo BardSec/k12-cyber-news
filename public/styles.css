@@ -75,12 +75,6 @@ a:hover { text-decoration: underline; }
   color: var(--text-muted);
 }
 
-.header-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .badge {
   font-size: .72rem;
   font-weight: 600;
@@ -101,26 +95,6 @@ a:hover { text-decoration: underline; }
   0%, 100% { opacity: 1; }
   50%       { opacity: .6; }
 }
-
-.btn-icon {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  border-radius: var(--radius);
-  width: 34px;
-  height: 34px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: color .15s, border-color .15s, transform .3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-icon:hover { color: var(--text); border-color: var(--accent); }
-.btn-icon.spinning { animation: spin .6s linear infinite; }
-
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ─── Controls bar ──────────────────────────────────────────────────────── */
 .controls-bar {

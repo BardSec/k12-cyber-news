@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-site="k12">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>K12 Cyber Watch — Cybersecurity News for Schools</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="stylesheet" href="brand/brand.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="brand/favicon-32.png" />
+  <link rel="apple-touch-icon" href="brand/edtechirl-badge-180.png" />
 </head>
 <body>
+
+  <!-- ── EdTech IRL network bar (same on every EdTech IRL news site) ── -->
+  <nav class="network-bar" aria-label="EdTech IRL sites">
+    <div class="network-inner">
+      <a class="network-brand" href="https://www.edtechirl.com/">
+        <img src="brand/edtechirl-badge-64.png" alt="" width="28" height="28" />
+        <span>EdTech IRL</span>
+      </a>
+      <ul class="network-links">
+        <li><a href="https://news.edtechirl.com/" aria-current="page">K12 Cyber Watch</a></li>
+        <li><a href="https://hied-news.edtechirl.com/">HiEd Cyber News</a></li>
+        <li><a href="https://ressec-news.edtechirl.com/">ResSec News</a></li>
+        <li><a href="https://www.edtechirl.com/">Blog</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <!-- ── Header ── -->
   <header class="site-header">
@@ -22,7 +40,7 @@
 
       <div class="header-meta">
         <span class="badge live">● LIVE FEED</span>
-        <button id="btn-refresh" class="btn-icon" title="Reload latest articles">↻</button>
+        <span class="feed-note">Feed is rebuilt every 30 minutes</span>
       </div>
     </div>
   </header>
@@ -126,6 +144,17 @@
 
     </aside>
   </main>
+
+  <!-- ── EdTech IRL network footer ── -->
+  <footer class="network-footer">
+    <div class="footer-inner">
+      <a href="https://www.edtechirl.com/" aria-label="EdTech IRL"><img src="brand/edtechirl-badge-64.png" alt="" width="40" height="40" /></a>
+      <p>
+        News feeds from <a href="https://www.edtechirl.com/">EdTech IRL</a>:
+        <a href="https://news.edtechirl.com/" aria-current="page">K12 Cyber Watch</a> · <a href="https://hied-news.edtechirl.com/">HiEd Cyber News</a> · <a href="https://ressec-news.edtechirl.com/">ResSec News</a>
+      </p>
+    </div>
+  </footer>
 
   <!-- ── Skeleton template ── -->
   <template id="skeleton-tpl">
