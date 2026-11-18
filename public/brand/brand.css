@@ -144,3 +144,23 @@ html[data-site="ressec"] {
   .header-inner { flex-wrap: wrap; }
   .header-meta { flex-direction: row; align-items: center; gap: 10px; width: 100%; }
 }
+
+/* ── Subscribe card (sidebar) ── */
+.subscribe-card p {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.subscribe-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: var(--radius);
+}
+.subscribe-btn:hover { text-decoration: none; filter: brightness(1.1); }

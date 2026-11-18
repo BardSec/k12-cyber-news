@@ -9,9 +9,11 @@ const fs = require('fs');
 const crypto = require('crypto');
 const path = require('path');
 const { FEEDS, fetchAll, sourceNames } = require('../lib/aggregator');
+const { buildRss } = require('../lib/feed');
 
 const ROOT = path.join(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
+const SITE = require('../site.json');   // title, description, url for the RSS feed
 const MIN_ARTICLES = parseInt(process.env.MIN_ARTICLES, 10) || 20;
 
 (async () => {
@@ -23,6 +25,7 @@ const MIN_ARTICLES = parseInt(process.env.MIN_ARTICLES, 10) || 20;
     process.exit(1);
   }
 
+  const builtAt = Date.now();
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.cpSync(path.join(ROOT, 'public'), DIST, { recursive: true });
 
@@ -43,9 +46,10 @@ const MIN_ARTICLES = parseInt(process.env.MIN_ARTICLES, 10) || 20;
   fs.mkdirSync(path.join(DIST, 'data'), { recursive: true });
   fs.writeFileSync(
     path.join(DIST, 'data', 'articles.json'),
-    JSON.stringify({ articles, lastFetched: Date.now() })
+    JSON.stringify({ articles, lastFetched: builtAt })
   );
   fs.writeFileSync(path.join(DIST, 'data', 'sources.json'), JSON.stringify(sourceNames()));
+  fs.writeFileSync(path.join(DIST, 'feed.xml'), buildRss(SITE, articles, builtAt));
   console.log(`[build] Wrote ${path.relative(ROOT, DIST)}/`);
   // rss-parser leaves keep-alive sockets open, which would hang the CI job
   process.exit(0);
