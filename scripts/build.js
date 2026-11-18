@@ -6,6 +6,7 @@
 // Exits non-zero (so CI skips the deploy and the last good version stays live)
 // if the fetch looks broken — too few articles or most feeds failing.
 const fs = require('fs');
+const crypto = require('crypto');
 const path = require('path');
 const { FEEDS, fetchAll, sourceNames } = require('../lib/aggregator');
 
@@ -24,6 +25,21 @@ const MIN_ARTICLES = parseInt(process.env.MIN_ARTICLES, 10) || 20;
 
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.cpSync(path.join(ROOT, 'public'), DIST, { recursive: true });
+
+  // Cache-bust scripts and stylesheets. The edtechirl.com zone tells browsers to
+  // keep JS/CSS for 4 hours (Cloudflare Browser Cache TTL), while HTML is always
+  // revalidated, so after a deploy a returning visitor could get new HTML with an
+  // old app.js and a broken page. Stamping each URL with a hash of its contents
+  // makes every changed file a new URL.
+  const indexPath = path.join(DIST, 'index.html');
+  let html = fs.readFileSync(indexPath, 'utf8');
+  html = html.replace(/(href|src)="([^"?#:]+\.(?:css|js))"/g, (match, attr, file) => {
+    const assetPath = path.join(DIST, file);
+    if (!fs.existsSync(assetPath)) return match;
+    const hash = crypto.createHash('sha256').update(fs.readFileSync(assetPath)).digest('hex').slice(0, 10);
+    return `${attr}="${file}?v=${hash}"`;
+  });
+  fs.writeFileSync(indexPath, html);
   fs.mkdirSync(path.join(DIST, 'data'), { recursive: true });
   fs.writeFileSync(
     path.join(DIST, 'data', 'articles.json'),
