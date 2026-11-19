@@ -120,6 +120,13 @@ This site is one of three EdTech IRL news feeds: [K12 Cyber Watch](https://news.
 - Each page picks its accent with `<html data-site="k12|hied|ressec">`. Accents: K12 blue `#1D4ED8`, HiEd teal `#0F766E`, ResSec orange `#B45309` for text with `#FF8200` for highlights. The EdTech IRL coral `#FD5353` is used only in the top bar.
 - `public/brand/` also holds the IRL badge (`edtechirl-badge-64.png`, `-180.png`, `favicon-32.png`).
 
+## Weekly newsletter header
+
+`newsletter/` holds the header image for the weekly K12 Cyber Watch email on Substack. It is not part of the site and is never deployed.
+
+- `header.html` is the design source (1456×485, twice Substack's 728px post width). `badge-500.png` is the high-res IRL badge it uses.
+- `./newsletter/render.sh` renders it to `k12-cyber-watch-header.png` with headless Chrome (macOS path).
+
 ## Tech stack
 
 - Node.js 20 / Express
